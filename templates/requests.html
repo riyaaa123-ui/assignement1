@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+  <div class="d-flex justify-content-between mb-3">
+    <h3>All Requests</h3>
+    <a class="btn btn-primary" href="{{ url_for('new_request') }}">+ New Request</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="table-light">
+            <tr>
+              <th>ID</th><th>Item</th><th>Plant</th><th>Dept</th><th>Raised By</th><th>Status</th><th>Created</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for req in requests %}
+            <tr>
+              <td>{{ req.id }}</td>
+              <td>{{ req.item_name }}</td>
+              <td>{{ req.plant }}</td>
+              <td>{{ req.department_raised }}</td>
+              <td>{{ req.raised_by or "-" }}</td>
+              <td><span class="badge bg-info">{{ req.status }}</span></td>
+              <td>{{ req.created_at.strftime("%Y-%m-%d") }}</td>
+              <td>
+                <a class="btn btn-sm btn-outline-primary" href="{{ url_for('view_request', rid=req.id) }}">View</a>
+              </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="8" class="text-center">No requests</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

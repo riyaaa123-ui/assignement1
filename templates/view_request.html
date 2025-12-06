@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container py-4">
+  <div class="card mb-3">
+    <div class="card-body d-flex justify-content-between">
+      <div>
+        <h4>Request #{{ req.id }} — {{ req.item_name }}</h4>
+        <small>Raised by {{ req.raised_by }} on {{ req.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+      </div>
+      <div>
+        <a class="btn btn-secondary" href="{{ url_for('dashboard') }}">Back</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5>Details</h5>
+      <p><strong>Plant:</strong> {{ req.plant }}</p>
+      <p><strong>Department:</strong> {{ req.department_raised }}</p>
+      <p><strong>Description:</strong> {{ req.material_description or '-' }}</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <h5>Approval Trail</h5>
+
+      <ul class="list-group">
+        <li class="list-group-item">
+          <strong>HOD:</strong>
+          {% if req.hod_approved %}
+            Approved by {{ req.hod_approved_by }} at {{ req.hod_approved_at }}
+          {% else %}
+            Pending
+          {% endif %}
+        </li>
+
+        <li class="list-group-item">
+          <strong>Dept HOD:</strong>
+          {% if req.dept_hod_approved %}
+            Approved by {{ req.dept_hod_approved_by }} at {{ req.dept_hod_approved_at }}
+          {% else %}
+            Pending
+          {% endif %}
+        </li>
+
+        <li class="list-group-item">
+          <strong>Store:</strong>
+          {% if req.store_approved %}
+            Approved by {{ req.store_approved_by }} at {{ req.store_approved_at }}
+          {% else %}
+            Pending
+          {% endif %}
+        </li>
+
+        <li class="list-group-item">
+          <strong>GST:</strong>
+          {% if req.gst_approved %}
+            Approved by {{ req.gst_approved_by }} at {{ req.gst_approved_at }}
+          {% else %}
+            Pending
+          {% endif %}
+        </li>
+
+        <li class="list-group-item">
+          <strong>Purchase:</strong>
+          {% if req.purchase_approved %}
+            Approved by {{ req.purchase_approved_by }} at {{ req.purchase_approved_at }}
+          {% else %}
+            Pending
+          {% endif %}
+        </li>
+
+        <li class="list-group-item">
+          <strong>IT:</strong>
+          {% if req.it_approved %}
+            Approved by {{ req.it_approved_by }} at {{ req.it_approved_at }}
+          {% else %}
+            Pending
+          {% endif %}
+        </li>
+      </ul>
+
+      <div class="mt-3">
+        {% if session.get('role') in ['Admin'] or (session.get('role') == 'User' and session.get('user_name') == req.raised_by) %}
+          <!-- show raw DB row view link or admin-only features -->
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container" style="max-width:480px;">
+  <div class="card mt-5">
+    <div class="card-body">
+
+      <h4 class="mb-3">Sign in</h4>
+
+      {% if as_role %}
+        <div class="alert alert-info py-2">
+          Suggested login for: <strong>{{ as_role }}</strong>
+        </div>
+      {% endif %}
+
+      <form method="POST" action="{{ url_for('login') }}">
+
+        <!-- hidden next URL -->
+        <input type="hidden" name="next" value="{{ request.args.get('next') or next_url }}">
+
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input name="username" class="form-control" required 
+                 value="{{ suggested_username or '' }}">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" required>
+        </div>
+
+        <button class="btn btn-primary w-100">Login</button>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

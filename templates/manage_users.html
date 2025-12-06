@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+  <h4>Manage Users</h4>
+  <div class="card">
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr><th>ID</th><th>Username</th><th>Role</th></tr>
+        </thead>
+        <tbody>
+          {% for u in users %}
+          <tr><td>{{ u.id }}</td><td>{{ u.username }}</td><td>{{ u.role }}</td></tr>
+          {% else %}
+          <tr><td colspan="3">No users</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+  <div class="card">
+    <div class="card-body">
+      <h4>New Material Request</h4>
+      <form method="POST" action="{{ url_for('new_request') }}">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Plant</label>
+            <input name="plant" class="form-control" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Department</label>
+            <input name="department_raised" class="form-control" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Item Name</label>
+            <input name="item_name" class="form-control" required>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea name="material_description" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-3">
+            <label class="form-label">Unit</label>
+            <input name="unit_of_measurement" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Group</label>
+            <input name="material_group" class="form-control">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Type</label>
+            <input name="material_type" class="form-control">
+          </div>
+        </div>
+
+        <button class="btn btn-primary">Submit Request</button>
+        <a class="btn btn-secondary ms-2" href="{{ url_for('dashboard') }}">Cancel</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

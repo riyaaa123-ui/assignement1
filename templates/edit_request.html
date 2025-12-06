@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="card">
+  <h5>Edit Request #{{ req.id }}</h5>
+  <form method="post">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Plant</label>
+        <select class="form-select" name="plant">
+          <option value="">-- Select --</option>
+          {% for p in plants %}
+            <option value="{{ p }}" {% if req.plant==p %}selected{% endif %}>{{ p }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Department Raised</label>
+        <select class="form-select" name="department_raised">
+          <option value="">-- Select --</option>
+          {% for d in departments %}
+            <option value="{{ d }}" {% if req.department_raised==d %}selected{% endif %}>{{ d }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div class="col-md-8">
+        <label class="form-label">Item Name</label>
+        <input name="item_name" class="form-control" required value="{{ req.item_name }}">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Qty</label>
+        <input name="quantity" type="number" min="1" value="{{ req.quantity or 1 }}" class="form-control">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Unit</label>
+        <input name="unit_of_measurement" class="form-control" value="{{ req.unit_of_measurement }}">
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Material Group</label>
+        <input name="material_group" class="form-control" value="{{ req.material_group }}">
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Material Type</label>
+        <input name="material_type" class="form-control" value="{{ req.material_type }}">
+      </div>
+
+      <div class="col-12">
+        <label class="form-label">Description</label>
+        <textarea name="description" class="form-control" rows="3">{{ req.description }}</textarea>
+      </div>
+
+      <div class="col-12 text-end">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">Back</a>
+        <button class="btn btn-primary">Save Changes</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}

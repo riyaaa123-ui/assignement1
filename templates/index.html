@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container text-center mt-5">
+
+    <h1 class="fw-bold display-4 text-primary">Material Workflow System</h1>
+    <p class="lead text-muted mt-3">
+        A complete step-by-step approval workflow for Material Requests.
+    </p>
+
+    <img src="https://cdn-icons-png.flaticon.com/512/6881/6881969.png"
+         alt="Workflow Icon"
+         width="180" class="mt-4">
+
+    <div class="mt-5">
+        <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg px-5">Login</a>
+    </div>
+
+</div>
+
+{% endblock %}
